@@ -13,5 +13,15 @@
         "name": "Interstellar",
         "director": "Christopher Nolan",
         "year": 2014
+    },
+    {
+        "name": "A Minecraft Movie",
+        "director": "Jared Hess",
+        "year": 2025
+    },
+    {
+        "name": "Paul Blart: Mall Cop",
+        "director": "Steve Carr",
+        "year": 2009
     }
 ]
