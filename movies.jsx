@@ -1,6 +1,6 @@
 function Movie(props) {
     return (
-        <div style={{ marginBottom: "20px", borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
+        <div className="movie">
             <h2>{props.movie.name}</h2>
             <p><strong>Director:</strong> {props.movie.director}</p>
             <p><strong>Year:</strong> {props.movie.year}</p>
@@ -62,8 +62,12 @@ function MovieList(props) {
     return (
         <section>
             <h1>{props.title}</h1>
-            <AddMovieForm onAdd={addMovie} />
+            <div className = "addMovieDiv">
+                <h2> Add a New Movie </h2>
+                <AddMovieForm onAdd={addMovie} />
+            </div>
             <div className="movies">
+                <h2> Movie List </h2>
                 {movies.map(function (movie, index) {
                     return (
                         <Movie

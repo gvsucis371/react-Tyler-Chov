@@ -18,7 +18,7 @@ function AddMovieForm({ onAdd }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className= "addMovieForm">
             <input name="name" placeholder="Name" value={newMovie.name} onChange={handleChange} />
             <input name="director" placeholder="Director" value={newMovie.director} onChange={handleChange} />
             <input name="year" placeholder="Year" value={newMovie.year} onChange={handleChange} />
