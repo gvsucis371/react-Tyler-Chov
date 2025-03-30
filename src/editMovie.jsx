@@ -1,6 +1,6 @@
 import React from "react";
 
-function EditMovieForm({ movie, onSave, onCancel }) {
+function EditMovieForm({ movie, onSave, onCancel, existingMovies }) {
     const [edited, setEdited] = React.useState({ ...movie });
 
     function handleChange(e) {
@@ -11,13 +11,27 @@ function EditMovieForm({ movie, onSave, onCancel }) {
     function handleSubmit(e) {
         e.preventDefault();
 
+        const trimmedName = edited.name.trim();
+        const trimmedDirector = edited.director.trim();
         const year = parseInt(edited.year);
-        if (!edited.name || !edited.director || isNaN(year) || year < 1888 || year > new Date().getFullYear()) {
+
+        if (!trimmedName || !trimmedDirector || isNaN(year) || year < 1800 || year > new Date().getFullYear()) {
             alert("Please enter a valid movie name, director, and year.");
             return;
         }
 
-        onSave({ ...edited, year });
+        const isDuplicate = existingMovies.some(
+            (m) =>
+                m.id !== movie.id &&
+                m.name.trim().toLowerCase() === trimmedName.toLowerCase()
+        );
+
+        if (isDuplicate) {
+            alert("A movie with this name already exists.");
+            return;
+        }
+
+        onSave({ name: trimmedName, director: trimmedDirector, year });
     }
 
     return (

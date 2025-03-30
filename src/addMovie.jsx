@@ -1,6 +1,6 @@
 import React from "react";
 
-function AddMovieForm({ onAdd }) {
+function AddMovieForm({ onAdd, existingMovies }) {
     const [newMovie, setNewMovie] = React.useState({
         name: "",
         director: "",
@@ -18,9 +18,18 @@ function AddMovieForm({ onAdd }) {
             alert("Please enter a valid movie name, director, and year.");
             return;
         }
+
+        const isDuplicate = existingMovies.some(movie =>
+            movie.name.trim().toLowerCase() === newMovie.name.trim().toLowerCase()
+        );
+        if (isDuplicate) {
+            alert("A movie with this name already exists.");
+            return;
+        }
+        
             
         const year = parseInt(newMovie.year);
-        if (isNaN(year) || year < 1888 || year > new Date().getFullYear()) {
+        if (isNaN(year) || year < 1800 || year > new Date().getFullYear()) {
             alert("Please enter a valid year.");
             return;
         }

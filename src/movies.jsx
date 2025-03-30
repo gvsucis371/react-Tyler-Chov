@@ -13,8 +13,7 @@ import {
 import AddMovieForm from "./addMovie.jsx";
 import EditMovieForm from "./editMovie.jsx";
 
-
-function Movie({ movie, isEditing, onEdit, onDelete, onSaveEdit, onCancelEdit }) {
+function Movie({ movie, isEditing, onEdit, onDelete, onSaveEdit, onCancelEdit, existingMovies }) {
   return (
     <div className="movie">
       <h2>{movie.name}</h2>
@@ -26,6 +25,7 @@ function Movie({ movie, isEditing, onEdit, onDelete, onSaveEdit, onCancelEdit })
       {isEditing && (
         <EditMovieForm
           movie={movie}
+          existingMovies={existingMovies}
           onSave={onSaveEdit}
           onCancel={onCancelEdit}
         />
@@ -74,7 +74,7 @@ function MovieList({ title }) {
       <h1>{title}</h1>
 
       <h2>Add a New Movie</h2>
-      <AddMovieForm onAdd={addMovie} />
+      <AddMovieForm onAdd={addMovie} existingMovies={movies} />
 
       <h2>Movie List</h2>
       {movies.map(movie => (
@@ -86,6 +86,7 @@ function MovieList({ title }) {
           onDelete={() => deleteMovie(movie.id)}
           onSaveEdit={saveEdit}
           onCancelEdit={cancelEdit}
+          existingMovies={movies}
         />
       ))}
     </section>
