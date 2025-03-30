@@ -1,3 +1,5 @@
+import React from "react";
+
 function EditMovieForm({ movie, onSave, onCancel }) {
     const [edited, setEdited] = React.useState({ ...movie });
 
@@ -8,7 +10,14 @@ function EditMovieForm({ movie, onSave, onCancel }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onSave(edited);
+
+        const year = parseInt(edited.year);
+        if (!edited.name || !edited.director || isNaN(year) || year < 1888 || year > new Date().getFullYear()) {
+            alert("Please enter a valid movie name, director, and year.");
+            return;
+        }
+
+        onSave({ ...edited, year });
     }
 
     return (
@@ -21,3 +30,5 @@ function EditMovieForm({ movie, onSave, onCancel }) {
         </form>
     );
 }
+
+export default EditMovieForm;
